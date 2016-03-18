@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="cn.gx.model">
+    <class name="cn.gx.model.many2one.Employee" table="EMPLOYEE">
+        <meta attribute="class-description">
+            This class contains the employee detail.
+        </meta>
+        <id name="id" type="int" column="id">
+            <generator class="native"/>
+        </id>
+        <property name="firstName" column="first_name" type="string"/>
+        <property name="lastName" column="last_name" type="string"/>
+        <property name="salary" column="salary" type="int"/>
+
+        <!--The name attribute is set to the defined variable in the parent class(Employee)-->
+        <!--The column attribute is used to set the column name in the parent table EMPLOYEE.-->
+        <!--many to one ->unique:true->   one to one
+        only one Employee object can be associated with an address object.-->
+        <many-to-one name="address" column="address" unique="true"
+                     class="cn.gx.model.many2one.Address" not-null="true"/>
+    </class>
+
+
+    <class name="cn.gx.model.many2one.Address" table="ADDRESS">
+        <meta attribute="class-description">
+            This class contains the address detail.
+        </meta>
+        <id name="id" type="int" column="id">
+            <generator class="native"/>
+        </id>
+        <property name="street" column="street_name" type="string"/>
+        <property name="city" column="city_name" type="string"/>
+        <property name="state" column="state_name" type="string"/>
+        <property name="zipcode" column="zipcode" type="string"/>
+    </class>
+
+</hibernate-mapping>
